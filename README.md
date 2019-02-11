@@ -1,6 +1,7 @@
-# Tenri Bot
+# Webdo Bot
 
-> My personal telegram bot.
+> Telegram bot for webdonalds.  
+> Forked from [HelloDHLyn/tenri-bot](https://github.com/HelloDHLyn/tenri-bot).
 
 ## Development
 
@@ -23,6 +24,6 @@ python -m unittest test/**.py
 Use docker to start bot server.
 
 ```
-docker build -t hellodhlyn/tenri-bot .
-docker run -e "TELEGRAM_BOT_TOKEN=<your_bot_token>" hellodhlyn/tenri-bot
+docker build -t hellodhlyn/webdo-bot .
+docker run -e "TELEGRAM_BOT_TOKEN=<your_bot_token>" hellodhlyn/webdo-bot
 ```
