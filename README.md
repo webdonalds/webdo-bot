@@ -1,3 +1,6 @@
+[![](https://img.shields.io/circleci/project/github/hellodhlyn/webdo-bot.svg?style=for-the-badge&logo=circleci&maxAge=3600)](https://circleci.com/gh/hellodhlyn/webdo-bot)
+[![](https://img.shields.io/github/languages/top/hellodhlyn/webdo-bot.svg?style=for-the-badge&colorB=375eab&maxAge=3600)](#)
+
 # Webdo Bot
 
 > Telegram bot for webdonalds.  
