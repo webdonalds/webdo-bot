@@ -39,12 +39,14 @@ jobs:
       - run:
           when: on_success
           command: |
-            docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+            if [ "${CIRCLE_BRANCH}" = "master" ]; then
+              docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
 
-            docker build -t hellodhlyn/webdo-bot:latest .;
-            docker push hellodhlyn/webdo-bot:latest;
+              docker build -t hellodhlyn/webdo-bot:latest .;
+              docker push hellodhlyn/webdo-bot:latest;
 
-            if [ -n "${CIRCLE_TAG}" ]; then
-              docker build -t hellodhlyn/webdo-bot:${CIRCLE_TAG} .;
-              docker push hellodhlyn/webdo-bot:${CIRCLE_TAG};
+              if [ -n "${CIRCLE_TAG}" ]; then
+                docker build -t hellodhlyn/webdo-bot:${CIRCLE_TAG} .;
+                docker push hellodhlyn/webdo-bot:${CIRCLE_TAG};
+              fi
             fi
