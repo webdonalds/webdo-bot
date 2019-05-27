@@ -20,6 +20,8 @@ def handle(bot, update):
     elif cmds[0] in ['timer', '타이머']:
         # !timer <time> <message>
         cmd_timer(cmds[1:], bot, update)
+    elif cmds[0] == '택배':
+        cmd_delivery(cmds[1:], bot, update)
     elif cmds[0] == '출근':
         # !출근
         cmd_timer(['9h', '퇴근시간입니다!'], bot, update)
