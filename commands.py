@@ -1,7 +1,7 @@
 from datetime import datetime, timezone, timedelta
 import threading
 
-from libs import delivery
+from libs import delivery, waqi
 from parsers import *
 
 
@@ -17,13 +17,9 @@ def cmd_help(subcommands, bot, update):
 
     help_text = """
 !ping
-
-!timer <time> <text>
 !타이머 <time> <text>
-Example: !timer 3m 라면 불 끄기
-
 !택배 <택배사> <운송장번호>
-Example: !택배 CJ대한통운 1234567890
+!미세먼지
     """
     _reply_text(help_text, bot, update)
 
@@ -133,3 +129,44 @@ def _track_delivery(carrier, track_id, bot, update, first_call=False):
 
         if first_call:
             _reply_text('배송 내역에 변경이 있을 시 30분 간격으로 알림이 발송됩니다.', bot, update)
+
+def cmd_air_quality(subcommands, bot, update):
+    """
+    !미세먼지
+    """
+
+    data = waqi.get_city_feed('seoul')
+
+    pm10 = data['iaqi']['pm10']['v']
+    if pm10 < 15:
+        pm10_state = '아주 좋음'
+    elif pm10 < 30:
+        pm10_state = '좋음'
+    elif pm10 < 50:
+        pm10_state = '보통'
+    elif pm10 < 75:
+        pm10_state = '나쁨'
+    elif pm10 < 100:
+        pm10_state = '상당히 나쁨'
+    elif pm10 < 150:
+        pm10_state = '매우 나쁨'
+    else:
+        pm10_state = '최악'
+
+    pm25 = data['iaqi']['pm25']['v']
+    if pm25 < 8:
+        pm25_state = '아주 좋음'
+    elif pm25 < 15:
+        pm25_state = '좋음'
+    elif pm25 < 25:
+        pm25_state = '보통'
+    elif pm25 < 37:
+        pm25_state = '나쁨'
+    elif pm25 < 50:
+        pm25_state = '상당히 나쁨'
+    elif pm25 < 75:
+        pm25_state = '매우 나쁨'
+    else:
+        pm25_state = '최악'
+
+    _reply_text(f"\n[현재 서울의 대기 정보]\n미세먼지 : {pm10} ({pm10_state})\n초미세먼지: {pm25} ({pm25_state})", bot, update)

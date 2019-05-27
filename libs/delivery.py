@@ -1,8 +1,6 @@
-import os
 import requests
 
 _BASE_URL = 'https://apis.tracker.delivery'
-_API_KEY = os.environ.get('SWEETTRACKER_API_KEY')
 
 
 def list_carriers():

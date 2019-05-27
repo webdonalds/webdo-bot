@@ -25,6 +25,8 @@ def handle(bot, update):
     elif cmds[0] == '출근':
         # !출근
         cmd_timer(['9h', '퇴근시간입니다!'], bot, update)
+    elif cmds[0] == '미세먼지':
+        cmd_air_quality([], bot, update)
     elif cmds[0] == 'help':
         # !help
         cmd_help([], bot, update)
